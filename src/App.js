@@ -18,12 +18,12 @@ function App() {
         <Route path="/">
           <Route index element = {<Home/>} />
           <Route path = "login" element= {<Login/>} />
-          <Route path = "new" element= {<New/>}/>
+          {/* <Route path = "new" element= {<New/>}/> */}
           <Route path="signup" element={<Signup/>} />
           <Route path = "users">
             <Route index element= {<List/>}/>
             <Route path= ":userId" element = {<Single/>}/>
-            {/* <Route path = "new" element= {<New/>}/> */}
+            <Route path = "new" element= {<New/>}/>
 
           </Route>
 

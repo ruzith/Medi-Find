@@ -15,7 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 const Sidebar = () => {
   return (
     <div className="sidebar">
-    <div className="top"> <span className="logo"> Pharmacy Owners </span></div>
+    <div className="top"> <span className="logo"> Medifind Owners </span></div>
     <hr/>
     <div className="center">
 
