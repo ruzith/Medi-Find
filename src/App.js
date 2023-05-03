@@ -4,6 +4,9 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import Signup from "./pages/Signup/Signup";
+import Badu from "./pages/Badu/Badu";
+
+
 import {
   BrowserRouter,
   Routes,
@@ -20,6 +23,9 @@ function App() {
           <Route path = "login" element= {<Login/>} />
           {/* <Route path = "new" element= {<New/>}/> */}
           <Route path="signup" element={<Signup/>} />
+          <Route path="badu" element={<Badu/>} />
+          {/* <Route path="products" element={<Products/>}/> */}
+
           <Route path = "users">
             <Route index element= {<List/>}/>
             <Route path= ":userId" element = {<Single/>}/>
@@ -32,8 +38,8 @@ function App() {
             <Route path= ":productId" element = {<Single/>}/>
             <Route path = "new" element= {<New/>}/>
 
-          </Route>
-           </Route>
+          </Route> 
+            </Route>
       </Routes>
       </BrowserRouter>
     </div>

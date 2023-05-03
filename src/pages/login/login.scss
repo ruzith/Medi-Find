@@ -4,6 +4,9 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-image: url('../../components/background/login_background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 
   .logo {
     width: 200px;
@@ -12,33 +15,70 @@
   }
 
   h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    margin-bottom: 2rem;
   }
 
   form {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
 
     .form-group {
       display: flex;
       flex-direction: column;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
 
       label {
         margin-bottom: 0.5rem;
+        font-weight: bold;
       }
 
       input {
-        padding: 0.5rem;
-        border-radius: 0.25rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
         border: 1px solid #ccc;
+        font-size: 1.1rem;
+      }
+    }
+
+    .password-input-group {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 1rem;
+
+      a {
+        color: #007bff;
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
 
     button {
       padding: 0.5rem 1rem;
-      background-color: #007bff;
+      background-color: #007BFF;
       color: #fff;
       border: none;
       border-radius: 0.25rem;
