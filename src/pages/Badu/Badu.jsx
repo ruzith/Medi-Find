@@ -1,115 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import './badu.scss';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-const Badu = () => {
-  const [products, setProducts] = useState([]);
-  const [productId, setProductId] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState([]);
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
 
-  const handleAddProduct = () => {
-    if (!name || !price || !quantity) {
-      alert('Please fill all the required fields');
-      return;
-    }
-    const newProduct = {
-      productId: productId,
-      name: name,
-      price: price,
-      quantity: quantity
-    };
-    setProducts([...products, newProduct]);
-    setProductId('');
-    setName('');
-    setPrice('');
-    setQuantity('');
-  };
+function createData(orderId, productName, amount, paymentMethod) {
+  return { orderId, productName, amount, paymentMethod };
+}
 
-  const handleEditProduct = (index, newProductId, newName, newPrice, newQuantity) => {
-    const newProducts = [...products];
-    newProducts[index].productId = newProductId;
-    newProducts[index].name = newName;
-    newProducts[index].price = newPrice;
-    newProducts[index].quantity = newQuantity;
-    setProducts(newProducts);
-  };
+const rows = [
+  createData(1, 'Product A', 100, 'Credit card'),
+  createData(2, 'Product B', 200, 'PayPal'),
+  createData(3, 'Product C', 300, 'Bank transfer'),
+];
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handlePriceChange = (event) => {
-    setPrice(event.target.value);
-  };
-
-  const handleQuantityChange = (event) => {
-    setQuantity(event.target.value);
-  };
-
-  useEffect(() => {
-    const filteredProducts = products.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProducts(filteredProducts);
-  }, [searchTerm, products]);
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+export default function BaduTable() {
+  const classes = useStyles();
 
   return (
-    <div className="badu-container">
-      <h1>Products</h1>
-      <div className="add-product">
-        <input type="text" value={productId} onChange={(event) => setProductId(event.target.value)} placeholder="product id" />
-        <input type="text" value={name} onChange={handleNameChange} placeholder="Name" />
-        <input type="text" value={price} onChange={handlePriceChange} placeholder="Price" />
-        <input type="text" value={quantity} onChange={handleQuantityChange} placeholder="Quantity" />
-        <button onClick={handleAddProduct}>Add Product</button>
-      </div>
-      <div className="search-bar">
-        <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search" />
-      </div>
-      <table className="product-table">
-        <thead>
-          <tr>
-            <th>Product Id</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredProducts.map((product, index) => (
-            <tr key={index}>
-              <td>{product.productId}</td>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.quantity}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    const newProductId = prompt("Enter Product ID");
-                    const newName = prompt('Enter new name:');
-                    const newPrice = prompt('Enter new price:');
-                    const newQuantity = prompt('Enter new quantity:');
-                    handleEditProduct(index , newProductId, newName, newPrice, newQuantity);
-}}
->
-Edit
-</button>
-</td>
-</tr>
-))}
-</tbody>
-</table>
-</div>
-
-);
-};
-
-export default Badu;
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="badu table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Order Id</TableCell>
+            <TableCell>Product name</TableCell>
+            <TableCell align="right">Amount</TableCell>
+            <TableCell align="right">Payment method</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.orderId}>
+              <TableCell component="th" scope="row">
+                {row.orderId}
+              </TableCell>
+              <TableCell>{row.productName}</TableCell>
+              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell align="right">{row.paymentMethod}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

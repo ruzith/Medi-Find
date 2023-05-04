@@ -11,37 +11,45 @@ import ReorderIcon from '@mui/icons-material/Reorder';
 // import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
+import {Link} from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
-    <div className="top"> <span className="logo"> Medifind Owners </span></div>
+    <div className="top"> <span className="logo"> Pharmacy Owners </span></div>
     <hr/>
     <div className="center">
 
         <ul>
             <p className="title">MAIN </p>
+            <Link to= "/" style={{textDecoration: "none" }}>
             <li>
                 <DashboardIcon className="icon"/>
                 <span className="FOO"> Dashboard </span>
 
             </li>
+            </Link>
+
+
             <p className="title">LISTS </p>
-            {/* <li>
-                <PeopleAltIcon className="icon"/>
-                <span className="FOO"> Users </span>
-                
-            </li> */}
+            <Link to= "/inventory" style={{textDecoration: "none" }}>
+
             <li>
                 <InventoryIcon className="icon"/>
                 <span className="FOO"> Products </span>
                 
             </li>
+            </Link>
+
+
+
+            <Link to = "/orders" style={{textDecoration: "none"}}>
             <li>
                 <ReorderIcon className="icon"/>
                 <span className="FOO"> Orders </span>
                 
             </li>
+            </Link>
 
             {/* <li>
                 <LocalShippingIcon className="icon"/>
@@ -84,11 +92,17 @@ const Sidebar = () => {
                 <span className="FOO"> Profile </span>
                 
             </li>
+
+
+            <Link to= "/login" style={{textDecoration: "none" }}>
             <li>
                 <LogoutIcon className="icon"/>
                 <span className="FOO"> Log Out </span>
                 
             </li>
+            </Link>
+            
+
         </ul>
     </div>
     <div className="bottom">

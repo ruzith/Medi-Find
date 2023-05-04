@@ -5,7 +5,9 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import Signup from "./pages/Signup/Signup";
 import Badu from "./pages/Badu/Badu";
-
+import Inventory from "./pages/Inventory/Inventory";
+import Orders from "./pages/Orders/Orders";
+import Profile from "./pages/profile/Profile";
 
 import {
   BrowserRouter,
@@ -24,6 +26,10 @@ function App() {
           {/* <Route path = "new" element= {<New/>}/> */}
           <Route path="signup" element={<Signup/>} />
           <Route path="badu" element={<Badu/>} />
+          <Route path="inventory" element={<Inventory/>} />
+          <Route path="orders" element={<Orders/>} />
+          <Route path="profile" element={<Profile/>} />
+        
           {/* <Route path="products" element={<Products/>}/> */}
 
           <Route path = "users">
