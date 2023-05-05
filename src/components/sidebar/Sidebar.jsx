@@ -11,6 +11,7 @@ import ReorderIcon from '@mui/icons-material/Reorder';
 // import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {Link} from "react-router-dom";
 
 const Sidebar = () => {
@@ -51,6 +52,15 @@ const Sidebar = () => {
             </li>
             </Link>
 
+
+            <Link to = "/location" style={{textDecoration: "none"}}>
+            <li>
+                <LocationOnIcon className="icon"/>
+                <span className="FOO"> Location </span>
+                
+            </li>
+            </Link>
+
             {/* <li>
                 <LocalShippingIcon className="icon"/>
                 <span className="FOO"> Delivery  </span>
@@ -87,11 +97,13 @@ const Sidebar = () => {
             </li> */}
 
             <p className="title">USER </p>
+            <Link to= "/profile" style={{textDecoration: "none" }}>
             <li>
                 <AccountCircleIcon className="icon"/>
                 <span className="FOO"> Profile </span>
                 
             </li>
+            </Link>
 
 
             <Link to= "/login" style={{textDecoration: "none" }}>

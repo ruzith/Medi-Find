@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './login.scss';
 import Logo from '../../components/logo/logo.png';
 import BackgroundImage from '../../components/background/login_background.png';
+import {Link} from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -65,9 +66,13 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+
+      <Link to= "/signup" style={{textDecoration: "none" }}>
       <div className="signup-link">
         Don't have an account? <a href="#">Sign up</a>
       </div>
+      </Link>
+      
     </div>
   );
 };

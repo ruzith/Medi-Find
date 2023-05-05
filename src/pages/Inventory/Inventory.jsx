@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './inventory.scss';
+import { Dialog, DialogContentText, Button } from '@mui/material';
+import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
 
 const Inventory = () => {
   const [products, setProducts] = useState([]);
@@ -9,10 +13,13 @@ const Inventory = () => {
   const [quantity, setQuantity] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [open, setOpen] = useState(false);
 
   const handleAddProduct = () => {
     if (!name || !price || !quantity) {
       alert('Please fill all the required fields');
+      
       return;
     }
     const newProduct = {
@@ -28,13 +35,12 @@ const Inventory = () => {
     setQuantity('');
   };
 
-  const handleEditProduct = (index, newProductId, newName, newPrice, newQuantity) => {
+  const handleEditProduct = (newPrice, newQuantity) => {
     const newProducts = [...products];
-    newProducts[index].productId = newProductId;
-    newProducts[index].name = newName;
-    newProducts[index].price = newPrice;
-    newProducts[index].quantity = newQuantity;
+    newProducts[selectedIndex].price = newPrice;
+    newProducts[selectedIndex].quantity = newQuantity;
     setProducts(newProducts);
+    handleClose();
   };
 
   const handleNameChange = (event) => {
@@ -42,11 +48,11 @@ const Inventory = () => {
   };
 
   const handlePriceChange = (event) => {
-    setPrice(event.target.value);
+    setPrice(event.target.value.replace(/[^0-9.]/g, ''));
   };
 
   const handleQuantityChange = (event) => {
-    setQuantity(event.target.value);
+    setQuantity(event.target.value.replace(/[^0-9]/g, ''));
   };
 
   useEffect(() => {
@@ -60,14 +66,33 @@ const Inventory = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleClickOpen = (index) => {
+    setSelectedIndex(index);
+    setPrice(products[index].price);
+    setQuantity(products[index].quantity);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setSelectedIndex(-1);
+    setPrice('');
+    setQuantity('');
+    setOpen(false);
+  };
+
   return (
+<div className="SIDE">
+      <Sidebar/>
+      <div className="NAV">
+        <Navbar/>
+
     <div className="inventory-container">
-      <h1>Products</h1>
+      <h1>Add Products</h1>
       <div className="add-product">
         <input type="text" value={productId} onChange={(event) => setProductId(event.target.value)} placeholder="product id" />
         <input type="text" value={name} onChange={handleNameChange} placeholder="Name" />
-        <input type="text" value={price} onChange={handlePriceChange} placeholder="Price" />
-        <input type="text" value={quantity} onChange={handleQuantityChange} placeholder="Quantity" />
+        <input type="number" value={price} onChange={handlePriceChange} placeholder="Price" />
+        <input type="number" value={quantity} onChange={handleQuantityChange} placeholder="Quantity" />
         <button onClick={handleAddProduct}>Add Product</button>
       </div>
       <div className="search-bar">
@@ -84,32 +109,45 @@ const Inventory = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredProducts.map((product, index) => (
-            <tr key={index}>
-              <td>{product.productId}</td>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.quantity}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    const newProductId = prompt("Enter Product ID");
-                    const newName = prompt('Enter new name:');
-                    const newPrice = prompt('Enter new price:');
-                    const newQuantity = prompt('Enter new quantity:');
-                    handleEditProduct(index , newProductId, newName, newPrice, newQuantity);
-}}
->
+        {filteredProducts.map((product, index) => (
+<tr key={index}>
+<td>{product.productId}</td>
+<td>{product.name}</td>
+<td>{product.price}</td>
+<td>{product.quantity}</td>
+<td>
+<Button variant="contained" color="primary" onClick={() => handleClickOpen(index)}>
 Edit
-</button>
+</Button>
 </td>
 </tr>
 ))}
+{filteredProducts.length === 0 && (
+<tr>
+<td colSpan="5">No products found</td>
+</tr>
+)}
 </tbody>
 </table>
+<Dialog open={open} onClose={handleClose}>
+<DialogTitle>Edit Product</DialogTitle>
+<DialogContent>
+<DialogContentText>
+Please enter the New Price and Quantity for the product.
+</DialogContentText>
+<input type="number" value={price} onChange={handlePriceChange} placeholder="Price" />
+<br />
+<input type="number" value={quantity} onChange={handleQuantityChange} placeholder="Quantity" />
+</DialogContent>
+<DialogActions>
+<Button onClick={handleClose}>Cancel</Button>
+<Button onClick={() => handleEditProduct(price, quantity)}>Save</Button>
+</DialogActions>
+</Dialog>
 </div>
-
+</div>
+</div>
 );
 };
 
-export default Inventory;
+export default Inventory;
