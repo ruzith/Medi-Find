@@ -5,3 +5,103 @@
         flex: 6;
     }
 }
+
+.profile-container {
+  display: flex;
+  width: 100%;
+
+  .main-content {
+    flex: 6;
+    padding: 20px;
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+
+      .profile-picture {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .placeholder {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          background-color: #f0f0f0;
+          color: #888888;
+        }
+      }
+
+      .upload-button {
+        margin-left: 20px;
+
+        input[type="file"] {
+          display: none;
+        }
+
+        label {
+          padding: 8px 16px;
+          background-color: #007bff;
+          color: #ffffff;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+        }
+      }
+
+      .profile-details {
+        margin-left: 40px;
+
+        .component {
+          margin-bottom: 20px;
+          background-color: hsl(203, 59%, 92%);
+          border-radius: 4px;
+          padding: 20px;
+          margin: 10px;
+          text-align: center;
+
+          h2 {
+            font-size: 24px;
+            font-weight: bold;
+          }
+
+          input {
+            padding: 8px 12px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+          }
+        }
+
+        .owner-name {
+          margin-top: 20px;
+        }
+
+        .pharmacy-name {
+          margin-top: 10px;
+        }
+
+        .edit-profile-button {
+          button {
+            padding: 8px 16px;
+            border: none;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
