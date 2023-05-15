@@ -52,7 +52,7 @@ const Profile = () => {
               accept="image/*"
               onChange={handleProfilePictureUpload}
             />
-            <label htmlFor="profile-upload">Upload Profile Picture</label>
+            <label htmlFor="profile-upload">Upload</label>
           </div>
           <div className="profile-details">
             <div className="component owner-name">
